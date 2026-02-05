@@ -1,0 +1,42 @@
+1. ApplicationContext
+      Think of it as the container that holds all your beans.
+      It doesn’t care where the beans come from — it just manages them.
+
+Responsibilities:
+
+      Keeps track of all beans and their dependencies.
+      Instantiates beans when the app starts (or lazily if configured).
+      Injects dependencies (@Autowired) into beans.
+      Calls lifecycle methods (@PostConstruct) on beans.
+      Handles events and manages bean scope.
+
+   In short: ApplicationContext = “where all beans live and are managed.”
+
+2. Auto-Configuration
+      Auto-configuration is a process that tells Spring Boot which beans to create automatically.
+      It is one way beans get added to the ApplicationContext.
+
+Responsibilities:
+       Looks at what libraries are present.
+       Checks conditions (@ConditionalOnClass, @ConditionalOnMissingBean, etc.).
+       Registers beans into the ApplicationContext if conditions pass.
+
+    In short: Auto-configuration = “rules that automatically add beans to the ApplicationContext.”
+
+3. How they work together
+       Spring Boot starts and creates an ApplicationContext.
+       Spring Boot processes auto-configuration classes.
+       Each auto-configuration class may create beans and register them in the ApplicationContext.
+    The ApplicationContext now contains:
+        our beans (from @Component, @Service, @Controller, @Bean)
+        Beans from auto-configuration (like DataSource, DispatcherServlet, etc.)
+
+ applicationContext manages all beans, whether they came from you or auto-configuration.
+
+
+
+ 1- Maven/Gradle builds the project, downloads all dependencies defined in the build file, and makes them available on the classpath.
+ 2- When the application starts, Spring Boot creates an ApplicationContext.
+ 3- The ApplicationContext is responsible for managing all beans.
+ 4- Auto-configuration checks what classes and libraries are present on the classpath and registers the required beans into the ApplicationContext.
+ 5- The ApplicationContext then creates those beans and injects dependencies into classes that depend on them.

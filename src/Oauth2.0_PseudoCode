@@ -1,0 +1,30 @@
+Pseudo-code: OAuth 2.0 + OIDC Authorization Code Flow
+
+// Step 1: User opens the client application
+User opens Client_App
+
+// Step 2: Client redirects user to Authorization Server with scope including 'openid'
+Client_App.redirectTo(Auth_Server, scope="openid profile email")
+
+// Step 3: Authorization Server authenticates the user
+if User credentials valid:
+    Auth_Server.authenticate(User)   // AUTHENTICATION HAPPENS HERE
+    Auth_Server.askForConsent(Client_App)
+    if User grants consent:
+        Auth_Server.generateAuthorizationCode(Client_App)
+        Auth_Server.redirectTo(Client_App, code=Authorization_Code)
+
+// Step 4: Client exchanges Authorization Code for tokens
+tokens = Client_App.requestTokens(Auth_Server, Authorization_Code)
+
+// Step 5: Authorization Server returns tokens
+Access_Token = tokens.access_token     // for accessing APIs
+ID_Token     = tokens.id_token         // proves user authentication
+
+// Step 6: Client verifies ID Token signature & extracts user info
+if verifySignature(ID_Token):
+    User_Info = parseClaims(ID_Token)
+    Client_App.createUserSession(User_Info)
+
+// Step 7: Client accesses Resource Server with Access Token
+Resource_Response = Resource_Server.requestData(Access_Token)
