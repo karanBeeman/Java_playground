@@ -1,0 +1,16 @@
+1️⃣ Client requests token from OAuth server
+      ↓
+2️⃣ OAuth server issues access token to client
+      ↓
+3️⃣ Client calls API:
+      Authorization: Bearer <token>
+      ↓
+4️⃣ Request hits Akamai (edge/CDN/WAF)
+      ↓
+5️⃣ Akamai forwards request to API Gateway
+      ↓
+6️⃣ API Gateway validates token with OAuth server (or locally, if JWT)
+      ↓
+7️⃣ If valid, API Gateway routes request to the service in Kubernetes pod
+      ↓
+8️⃣ Pod executes the service layer logic and returns response

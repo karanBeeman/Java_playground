@@ -1,0 +1,28 @@
+| Variable Type                      | Declaration Example               | Compile-Time / Runtime        | Notes / Reason                                                   |
+| ---------------------------------- | --------------------------------- | ----------------------------- | ---------------------------------------------------------------- |
+| **Instance, non-final, primitive** | `int x;`                          | Compile-time (type)           | Compiler knows type & space reserved for each object             |
+| **Instance, non-final, primitive** | `int x = 10;`                     | Runtime (initialization)      | Value assigned when object is created                            |
+| **Instance, final, primitive**     | `final int x = 10;`               | Compile-time constant         | Compiler can use value in compile-time calculations              |
+| **Instance, non-final, object**    | `Dog d;`                          | Compile-time (reference type) | Compiler knows reference type exists                             |
+| **Instance, non-final, object**    | `Dog d = new Dog();`              | Runtime (object creation)     | Object is created at runtime, constructor runs                   |
+| **Instance, final, object**        | `final Dog d = new Dog();`        | Runtime (object creation)     | Reference cannot change, but object itself is created at runtime |
+| **Static, non-final, primitive**   | `static int x;`                   | Compile-time (type)           | Compiler knows static field exists                               |
+| **Static, non-final, primitive**   | `static int x = 10;`              | Runtime (initialization)      | Value assigned when class loads                                  |
+| **Static, final, primitive**       | `static final int X = 10;`        | Compile-time constant         | Compiler can inline the value anywhere                           |
+| **Static, non-final, object**      | `static Dog d;`                   | Compile-time (reference)      | Compiler knows reference exists                                  |
+| **Static, non-final, object**      | `static Dog d = new Dog();`       | Runtime (object creation)     | Object is created when class loads                               |
+| **Static, final, object**          | `static final Dog d = new Dog();` | Runtime (object creation)     | Reference cannot change, object created when class loads         |
+
+
+If it goes in the method area, it’s static → class-level.
+If it goes in heap, it’s instance → object-level.
+If it goes on stack, it’s local → method-level.
+
+
+| Memory Area                  | What It Stores                                                                    | Allocation Time / Notes                                                 |
+| ---------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **Method Area / Class Area   | Classleve-ldata:class bytecode,static/instance variables(byetcode),static methods,constants| Memory allocated **once when class is loaded**                          |
+| **Heap**                     | Objects and instance variables                                                    | Memory allocated **at object creation (`new`)**                         |
+| **Stack**                    | method- level,reference vars Local vars, method call frames, function parameters  | Memory allocated **when a method is called**, released when method ends |
+| **PC Register**              | Program counter for JVM instruction execution                                     | Per thread, runtime                                                     |
+| **Native / JVM Internal**    | JVM internal data and native method info                                          | Runtime                                                                 |

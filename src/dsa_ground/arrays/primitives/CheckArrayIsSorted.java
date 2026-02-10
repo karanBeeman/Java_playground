@@ -29,7 +29,8 @@ Exit
  Print "Array is sorted" */
 
 ///Complexity
-// O(n)
+//Best case: O(1) (array is not sorted, fails at first comparison)
+//Worst case: O(n) (array is sorted)
 
 /// Linear/traverse array
 

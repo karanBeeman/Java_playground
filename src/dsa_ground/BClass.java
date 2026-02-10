@@ -2,6 +2,10 @@ package dsa_ground;
 
 public class BClass extends AClass {
 
+    public BClass() {
+        super();
+    }
+
     static void method() {
         System.out.println("kumar");
     }

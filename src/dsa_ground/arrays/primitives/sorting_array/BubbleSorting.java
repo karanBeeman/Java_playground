@@ -1,5 +1,7 @@
 package dsa_ground.arrays.primitives.sorting_array;
 
+// problem: sort the array in ascending order
+
 public class BubbleSorting {
 
     public static void main(String[] args) {

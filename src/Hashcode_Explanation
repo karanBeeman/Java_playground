@@ -1,0 +1,28 @@
+Hashcode is the numeric representation of object to store and retrieve objects efficiently
+   commonly used by Hashmap, Hashset, Hashtable
+
+ map.put(key, value);
+   int hash = key.hashCode();              // 1. get hashCode
+   int spread = hash ^ (hash >>> 16);      // 2. mix bits
+   int index = (tableSize - 1) & spread;   // 3. calculate bucket index
+
+int hash  - generally int has 32 bits hashcode uses this bits
+>>> 16    - moves the upper 16 bits to lower 16 bits with 0 // line 15
+hash ^    - XOR mixes with lower 16 bits for better distribution and reduce collision while allocating the buckets
+tableSize - 1 & spread - picks the bucket efficiently
+
+ hash        = 00000101 11100010 11100101 00100010
+ hash>>>16   = 00000000 00000000 00000101 11100010
+ -----------------------------------------------
+ result      = 00000101 11100010 11100000 11000000 - XOR mix
+
+0 ^ 0 = 0
+1 ^ 1 = 0
+0 ^ 1 = 1
+1 ^ 0 = 1 - XOR
+
+In general Hashcode is to determine the bucket where the object should live in based on the index
+
+For collection-based - hashcode never works alone, it works along with the equals()
+   - Hashcode - determine the bucket
+   - equals() - checks if the KEY is already exits in the bucket
