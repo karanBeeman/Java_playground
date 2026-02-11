@@ -1,4 +1,4 @@
-package dsa_ground;
+package java_ground;
 
 /* ---- Fields (variables) are bound at compile time using reference type.
        Non-static fields are not polymorphic.

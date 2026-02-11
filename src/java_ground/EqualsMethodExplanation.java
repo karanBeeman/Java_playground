@@ -1,4 +1,4 @@
-package dsa_ground;
+package java_ground;
 
 // Equals method generally compares the object, (until unless it is overridden)
 /*     public boolean equals(Object obj) {
