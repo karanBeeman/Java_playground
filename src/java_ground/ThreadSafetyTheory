@@ -1,0 +1,73 @@
+A class is thread-safe if:
+   - Multiple threads can use it safely
+   - No race conditions
+   - No data corruption
+   - No inconsistent state
+
+Java achieves this in 4 main ways:
+   - Immutability
+   - Synchronization
+   - Atomic operations
+   - Concurrent collections
+
+Immutable = cannot change after creation.
+ These are automatically thread-safe.
+  Examples:
+   - String
+   - Integer
+   - Long
+   - Double
+   - Boolean
+   - BigDecimal
+   - BigInteger
+   - All wrapper classes
+   - LocalDate, LocalDateTime (java.time package)
+
+Synchronized Classes (Thread-Safe but Slower)
+   - Vector
+   - Hashtable
+   - StringBuffer
+   - Collections.synchronizedList(), synchronizedMap(), etc.
+
+Atomic Classes (Thread-Safe with Better Performance)
+    - AtomicInteger
+    - AtomicLong
+    - AtomicReference
+    - AtomicBoolean
+    - AtomicIntegerArray
+    - AtomicLongArray
+    - AtomicReferenceArray
+
+Concurrent Collections (Thread-Safe with High Performance)
+    - ConcurrentHashMap
+    - CopyOnWriteArrayList
+    - CopyOnWriteArraySet
+    - ConcurrentLinkedQueue
+    - ConcurrentLinkedDeque
+    - LinkedBlockingQueue
+    - ArrayBlockingQueue
+
+Which are not Thread-Safe?
+    - ArrayList
+    - HashMap
+    - HashSet
+    - LinkedList
+    - StringBuilder
+    - Non-atomic wrapper classes (e.g., Integer, Long when modified)
+
+Stack/Thread Stack: not shared between threads, each thread has its own stack
+and is created when the thread starts
+   - Local variables (primitives and references)
+   - Method call frames (return address, parameters, local variables)
+   - ThreadLocal variables (each thread has its own copy of a ThreadLocal variable, so they are thread-safe by design)
+
+--------------
+
+| Case                             | Thread-Safe? | Why                |
+| -------------------------------- | ------------ | -----------------  |
+| Local primitive                  | ✅ Yes        | Stack, not shared |
+| Local object reference           | ✅ Yes        | Stack, not shared |
+| Local mutable object             | ✅ Yes        | Not shared        |
+| Static primitive                 | ❌ No         | Shared            |
+| Static mutable object            | ❌ No         | Shared            |
+| Shared immutable object (String) | ✅ Yes        | Cannot change     |

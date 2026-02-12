@@ -21,8 +21,25 @@ If it goes on stack, it’s local → method-level.
 
 | Memory Area                  | What It Stores                                                                    | Allocation Time / Notes                                                 |
 | ---------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| **Method Area / Class Area   | Classleve-ldata:class bytecode,static/instance variables(byetcode),static methods,constants| Memory allocated **once when class is loaded**                          |
+| **Method Area / Class Area   | Classlevel-data:class bytecode,static variables,static/nonstatic methods(bytecode),constants| Memory allocated **once when class is loaded**                          |
 | **Heap**                     | Objects and instance variables                                                    | Memory allocated **at object creation (`new`)**                         |
-| **Stack**                    | method- level,reference vars Local vars, method call frames, function parameters  | Memory allocated **when a method is called**, released when method ends |
+| **Stack**                    | method- level,reference vars, Local vars, method call frames, function parameters | Memory allocated **when a method is called**, released when method ends |
 | **PC Register**              | Program counter for JVM instruction execution                                     | Per thread, runtime                                                     |
 | **Native / JVM Internal**    | JVM internal data and native method info                                          | Runtime                                                                 |
+
+Method Area: shared among all threads, stores class-level data
+and is created when the class is loaded
+   - Class metadata
+   - Method bytecode
+   - Static variables
+   - Runtime constant pool
+
+Heap: shared among all threads, used for dynamic memory allocation
+and is created when the JVM starts
+   - All objects created with `new`
+   - Instance variables of those objects
+
+Stack/Thread Stack: not shared between threads, each thread has its own stack
+and is created when the thread starts
+   - Local variables (primitives and references)
+   - Method call frames (return address, parameters, local variables)
