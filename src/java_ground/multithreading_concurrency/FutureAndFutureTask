@@ -1,0 +1,84 @@
+Future is an interface that represents the result of an asynchronous computation.
+//It provides methods to check if the computation is complete, to wait for its completion, and to retrieve the result of the computation.
+//The result can only be retrieved using method get() when the computation has completed, blocking if necessary until it is ready.
+
+futureTask is a class that implements the RunnableFuture interface, which means it can be used both as a Runnable and as a Future.
+This allows you to execute a task in a separate thread and retrieve its result later
+futuretask implements Runnable so it can be used with thread or executor service, and it also implements Future so it can return a result and handle exceptions.
+
+-----------------------------------------------------------------------
+Exmaple: 1
+===============
+ExecutorService executorService = Executors.newSingleThreadExecutor();
+Future<Integer> future = executorService.submit(() -> {
+    // Simulate long-running task
+    Thread.sleep(2000);
+    return 42;
+});
+future.get(); // This will block until the result is available
+
+Explanation for above code:
+Internally, the executor wraps your Callable in a FutureTask.
+FutureTask implements RunnableFuture, which is both:
+Runnable → can be executed by a thread
+Future → holds the result and allows get()
+############################################################################
+
+Exmaple: 2
+===============
+FutureTask<Integer> futureTask = new FutureTask<>(() -> {
+    // Simulate long-running task
+    Thread.sleep(2000);
+    return 42;
+});
+new Thread(futureTask).start();
+futureTask.get(); // This will block until the result is available
+
+Explanation for above code:
+we create a FutureTask directly with Callable,
+then start it in a new thread.
+We can call get() on the FutureTask to retrieve the result once it's ready.
+
+################################################################################
+
+Example: 3
+==================
+Callable<Integer> callable = () -> {
+    // Simulate long-running task
+    Thread.sleep(2000);
+    return 42;
+};
+
+FutureTask<Integer> futureTask2 = new FutureTask<>(callable);
+new Thread(futureTask2).start();
+
+Explanation for above code:
+Here, we first create a Callable that simulates a long-running task and returns an Integer.
+Then we wrap that Callable in a FutureTask, which allows us to execute it in a separate thread and retrieve the result later using get().
+
+Example 2 and Example 3 are essentially the same, just different ways to create the FutureTask.
+
+##################################################################################
+
+Example: 4
+==================
+
+FutureTask<Integer> futureTask3 = new FutureTask<>(() -> {
+    // Simulate long-running task
+    Thread.sleep(2000);
+    return 42;
+});
+
+ExecutorService executorService = Executors.newSingleThreadExecutor();
+Future<Integer> futureResult = executorService.submit(futureTask3);
+futureResult.get(); // This will block until the result is available
+
+Explanation for above code:
+In this example, we create a FutureTask with a Callable that simulates a long-running task.
+Then we submit that FutureTask to an ExecutorService, which will execute it in a separate thread.
+The submit() method returns a Future that we can use to retrieve the result once it's ready.
+
+Example 4 is similar to Example 2, but instead of starting a new thread directly, we use an ExecutorService to manage the thread for us.
+
+######################################################################################
+

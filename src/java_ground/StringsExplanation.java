@@ -31,6 +31,7 @@ public class StringsExplanation {
 }
 
 class StringBuilderExplanation {
+    // StringBuilder introduced in java 1.5
 // StringBuilder is MUTABLE - can modify the same object, no new object creation for every append/insert/delete.
     //new StringBuilder("hello"); "hello" literals stored in string pool and new StringBuilder("hello")
         //Copies characters from the pooled "hello" into its internal char array char[] in the heap memory
@@ -49,6 +50,7 @@ class StringBuilderExplanation {
 
 class StringBufferExplanation {
 
+    // StringBuffer introduced in java 1.0
     // StringBuffer is same as StringBuilder but it is thread-safe (synchronized) and hence slower than StringBuilder.
     // StringBuffer = Automatic car (safe but slightly slower)
     // StringBuilder = Manual car (faster but you must handle control)

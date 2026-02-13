@@ -1,0 +1,54 @@
+##### Runnable: interface with single method run() - java1.0
+--------------------------
+java.lang.Runnable: java.lang package, functional interface
+  No return
+  Cannot throw checked exception
+  Used with Thread
+
+public interface Runnable {
+    void run();
+}
+
+Runnable r = () -> {
+    System.out.println("Task running");
+};
+
+new Thread(r).start();
+new Thread(() -> {
+    System.out.println("Task running");
+}).run();
+
+
+#### Callable: interface with single method call() - java1.5
+--------------------------
+java.util.concurrent.Callable: java.util.concurrent package, functional interface
+  Returns value
+  Can throw exception
+  Used with ExecutorService
+
+public interface Callable<V> {
+    V call() throws Exception;
+}
+Callable<Integer> c = () -> {
+    return 42;
+};
+
+### start():
+-------
+  Creates new thread and calls run() internally in that thread
+  Executes concurrently
+
+### run():
+------
+  Normal method
+  No new thread
+
+
+| Method          | Description                 |
+| --------------- | --------------------------- |
+| `start()`       | Starts the thread           |
+| `run()`         | Contains code to execute    |
+| `sleep(ms)`     | Pauses thread               |
+| `join()`        | Waits for thread to finish  |
+| `isAlive()`     | Checks if thread is running |
+| `setPriority()` | Sets thread priority        |

@@ -1,0 +1,38 @@
+Threads vs ExecuorService
+
+// Threads are managed manually
+// ExecutorService manages a pool of threads and tasks automatically, introduced in Java 5 with java.util.concurrent package
+
+public class ThreadsVsExecutorService {
+    public static void main(String[] args) {
+        // Using Threads directly
+        Thread thread1 = new Thread(() -> {
+            System.out.println("Thread 1 is running");
+        });
+        thread1.start();
+
+        // Using ExecutorService to manage threads
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.submit(() -> {
+            System.out.println("Task 1 is running");
+        });
+        executorService.submit(() -> {
+            System.out.println("Task 2 is running");
+        });
+        executorService.shutdown();
+    }
+}
+
+| Aspect               | Thread               | ExecutorService               |
+| -------------------- | -------------------- | ----------------------------- |
+| Thread creation      | Manual               | Automatic from pool           |
+| Task reuse           | No                   | Yes                           |
+| Task result          | No                   | Yes (via Future)              |
+| Exception handling   | Manual               | Automatic with Future         |
+| Parallelism          | You manage           | Managed by pool               |
+| Queuing              | No                   | Yes, extra tasks queued       |
+| Lifecycle management | Manual               | Managed (shutdown, terminate) |
+| Recommended          | Simple one-off tasks | Real-world production apps    |
+
+Both support Runnable and Callable, but ExecutorService is more powerful and flexible for managing multiple tasks and threads efficiently.
+Callable allows exceptions via futureTask.get() while Runnable does not.

@@ -10,7 +10,7 @@ package java_ground;
        Reference type → decides fields and static members at compile time
        Object type    → decides instance method execution at runtime ---- */
 
-public class CompileVsRuntime {
+class CompileTimeClass {
 
     // Instance variable
     int instanceVar = 10; //
@@ -38,7 +38,7 @@ public class CompileVsRuntime {
 
 }
 
-class SubClass extends CompileVsRuntime {
+class RuntimeClass extends CompileTimeClass {
 
     // Instance variable hides A's
     int instanceVar = 20;
@@ -66,17 +66,17 @@ class SubClass extends CompileVsRuntime {
     }
 }
 
-class Test {
+public class CompileVsRuntime {
     public static void main(String[] args) {
         System.out.println("=== Reference type: A, Object type: A ===");
-        CompileVsRuntime obj1 = new CompileVsRuntime();
+        CompileTimeClass obj1 = new CompileTimeClass();
         System.out.println("obj1.instanceVar = " + obj1.instanceVar); // 10 (compile-time reference type)
         System.out.println("obj1.staticVar = " + obj1.staticVar);     // 100 (static based on reference type)
         obj1.instanceMethod(); // A.instanceMethod() → runtime based on object type (A)
         obj1.staticMethod();   // A.staticMethod() → compile-time based on reference type
 
         System.out.println("\n=== Reference type: A, Object type: B ===");
-        CompileVsRuntime obj2 = new SubClass();
+        CompileTimeClass obj2 = new RuntimeClass();
         System.out.println("obj2.instanceVar = " + obj2.instanceVar); // 10 (compile-time reference type)
         System.out.println("obj2.staticVar = " + obj2.staticVar);     // 100 (static based on reference type)
         obj2.instanceMethod(); // B.instanceMethod() → runtime based on object type (B)
@@ -85,7 +85,7 @@ class Test {
         obj2.methodOverloading(1);
 
         System.out.println("\n=== Reference type: B, Object type: B ===");
-        SubClass obj3 = new SubClass();
+        RuntimeClass obj3 = new RuntimeClass();
         System.out.println("obj3.instanceVar = " + obj3.instanceVar); // 20 (reference type B)
         System.out.println("obj3.staticVar = " + obj3.staticVar);     // 200 (static based on reference type)
         obj3.instanceMethod(); // B.instanceMethod() → runtime (object type B)
