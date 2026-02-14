@@ -73,6 +73,10 @@ public class TwoSumProblem {
                 list.add("(" + complement + ", " + arr[i] + ")");
             }
             map.put(arr[i], i);
+            // arr[i] = 2, complement = 7, map = {2:0}
+            // arr[i] = 4, complement = 5, map = {2:0, 4:1}
+            // arr[i] = 5, complement = 4, map = {2:0, 4:1, 5:2} → list = [(4, 5)]
+            // arr[i] = 7, complement = 2, map = {2:0, 4:1, 5:2, 7:3} → list = [(4, 5), (2, 7)]
         }
         System.out.println(list);
     }
