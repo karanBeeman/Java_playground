@@ -1,3 +1,7 @@
+Rule of thumb:
+  * Multithreadin - If you’re just creating and starting threads, think multithreading.
+  * Concurrencty  - If you’re executing, scheduling, or coordinating tasks across threads, think concurrency
+
 ##### Runnable: interface with single method run() - java1.0
 --------------------------
 java.lang.Runnable: java.lang package, functional interface

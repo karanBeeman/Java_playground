@@ -102,4 +102,8 @@ class FutureTaskExample {
          }
          executor.shutdown();
      }
+
+   //  FutureTask <String> futureTask1 = new FutureTask<>(() -> "FutureTask result from thread: " + Thread.currentThread().getName()); // Same code using lambda expression
+   //   executor.submit(futureTask1); // Executes the FutureTask in the thread pool
+   //  this internally call futureTask1.run() method which will execute the call method of the Callable and set the result in the FutureTask, allowing us to retrieve it later using futureTask1.get()
 }
