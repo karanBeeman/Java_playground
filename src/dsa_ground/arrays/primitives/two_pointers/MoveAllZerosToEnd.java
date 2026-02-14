@@ -1,4 +1,4 @@
-package dsa_ground.arrays.primitives;
+package dsa_ground.arrays.primitives.two_pointers;
 
 ///Problem Statement
 //Given an array of integers, move all 0s to the end of the array while maintaining the relative order of non-zero elements.
@@ -60,16 +60,35 @@ public class MoveAllZerosToEnd {
 
     public static void main(String[] args) {
        int[] arr = {0, 1, 0, 3, 12};
-       int nonZeroValues = 0;
-       for (int i = 0; i < arr.length; i++) {
-           if(arr[i] !=0) {
-               arr[nonZeroValues++] = arr[i]; // arr[0] = 1 = arr[1] = 3 arr[2] = 12
-           }
-       }
+       int i = 0;
+       int nonZero = 0;
+//       int nonZeroValues = 0;
+//       for (int i = 0; i < arr.length; i++) {
+//           if(arr[i] !=0) {
+//               arr[nonZeroValues++] = arr[i]; // arr[0] = 1 = arr[1] = 3 arr[2] = 12
+//           }
+//       }
+//
+//       while (nonZeroValues < arr.length) {
+//           arr[nonZeroValues++] = 0;
+//       }
+//
+//        System.out.println(Arrays.toString(arr));
 
-       while (nonZeroValues < arr.length) {
-           arr[nonZeroValues++] = 0;
-       }
+        // Step 1: Move non-zero elements forward
+        while (i < arr.length) {
+            if (arr[i] != 0) {
+                arr[nonZero] = arr[i];
+                nonZero++;
+            }
+            i++;
+        }
+
+       // Step 2: Fill remaining positions with zero
+        while (nonZero < arr.length) {
+            arr[nonZero] = 0;
+            nonZero++;
+        }
 
         System.out.println(Arrays.toString(arr));
     }

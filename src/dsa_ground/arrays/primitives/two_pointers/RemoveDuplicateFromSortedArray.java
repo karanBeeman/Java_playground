@@ -51,7 +51,7 @@ public class RemoveDuplicateFromSortedArray {
 
     public static void main(String[] args) {
 
-        int[] arr = { 1, 1, 2, 3, 4, 5, 6};
+        int[] arr = { 1, 1, 2, 3, 4, 5, 6, 6 , 6};
         int j = 0; // slow pointer
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] != arr[j]) {
