@@ -75,10 +75,14 @@ public class FirstOccurrenceOfElement {
 /// NOTE: BINARY SEARCH ONLY WORKS ON SORTED ARRAY
         int low = 0;
         int high = arr.length - 1;
-        int first = -1;
+        int first = -1; // to store the index of first occurrence, initialized to -1 to indicate not found
 
         while (low <= high) {
-            int mid = low + (high - low) / 2;
+            int mid = low + (high - low) / 2; // to avoid overflow, instead of (low + high) / 2
+            // mid = 0 + (5 - 0) / 2 = 2, arr[mid] = 2, first = 2, high = 1
+            // mid = 0 + (1 - 0) / 2 = 0, arr[mid] = 1, low = 1, high = 1
+            // mid = 1 + (1 - 1) / 2 = 1, arr[mid] = 2, first = 1, high = 0
+            // low = 1, high = 0, loop ends, first = 1
             if (arr[mid] == target) {
                 first = mid; // first possible occurrence
                 // assuming target is 2 and condition passes

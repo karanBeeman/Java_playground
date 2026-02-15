@@ -37,7 +37,6 @@ public class BubbleSorting {
     i =2 -> j=3 -> 10 > 5 -> arr[2] =5 and arr[3]=10
     i =2 -> j=4 -> 5 > 4 -> arr[2] =4 and arr[4]=5 [1,2,4,10,5]
     i =3 -> j=4 -> 10 > 5 -> arr[3] =5 and arr[4]=10 [1,2,4,5,10]
-
  */
 
 }

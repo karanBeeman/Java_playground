@@ -69,7 +69,7 @@ public class Palindrome {
         boolean isPalindrome = true;
 
         while (left < right) {
-           // if (arr[left] != arr[right]) { // no need of this
+           // if (arr[left] != arr[right]) { // no need for string to char array conversion, we can directly use charAt() method of string
             if (s.charAt(left) != s.charAt(right)) {
                 isPalindrome = false;
                 System.out.println("not palindrome");
