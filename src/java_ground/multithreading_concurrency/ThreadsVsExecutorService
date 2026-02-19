@@ -1,6 +1,11 @@
 Threads vs ExecuorService
-
+// Thread is a small portion of a process that can run concurrently with other threads, introduced in Java 1.0 with java.lang.Thread class
+// It represents a single thread of execution and is used for simple tasks, but can be difficult to manage and scale for complex applications
+// It cannot run the task parallelly, but it can run concurrently, meaning it can interleave execution with other threads, but not necessarily at the same time (depends on CPU scheduling and number of cores)
+// It will run sequentially if there is only one CPU core, but it can run in parallel if there are multiple cores and the OS schedules it that way
 // Threads are managed manually
+
+
 // ExecutorService manages a pool of threads and tasks automatically, introduced in Java 5 with java.util.concurrent package
 
 public class ThreadsVsExecutorService {

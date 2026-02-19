@@ -28,6 +28,16 @@ public class ConcurrencyAndMultithreading {
         executorServiceExample.exec();
         FutureTaskExample futureTaskExample = new FutureTaskExample();
         futureTaskExample.futureTaskMethod();
+
+        Thread t1 = new Thread(new MyTask());
+        t1.start();
+    }
+}
+
+class MyTask extends Thread {
+
+    public void run() {
+        System.out.println("threads ");
     }
 }
 

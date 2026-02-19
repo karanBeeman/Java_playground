@@ -1,5 +1,5 @@
 Rule of thumb:
-  * Multithreadin - If you’re just creating and starting threads, think multithreading.
+  * Multithreading - If you’re just creating and starting threads, think multithreading.
   * Concurrencty  - If you’re executing, scheduling, or coordinating tasks across threads, think concurrency
 
 ##### Runnable: interface with single method run() - java1.0
@@ -56,3 +56,13 @@ Callable<Integer> c = () -> {
 | `join()`        | Waits for thread to finish  |
 | `isAlive()`     | Checks if thread is running |
 | `setPriority()` | Sets thread priority        |
+
+
+| Feature           | Concurrency  | Parallelism  |
+| ----------------- | -----------  | -----------  |
+| Thread            | ✅           | ⚠️ Maybe     |
+| ExecutorService   | ✅           | ✅           |
+| Parallel Stream   | ❌           | ✅           |
+| ForkJoinPool      | ❌           | ✅           |
+| CompletableFuture | ✅           | ✅           |
+
