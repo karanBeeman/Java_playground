@@ -1,0 +1,22 @@
+PHASE 1: Core Architecture
+  Understand the Hierarchy
+  Why Map does NOT extend Collection
+PHASE 2: Implementations + Internals (Critical)
+  List Implementations
+  Set Implementations
+Map Implementations (Most Important
+    HashMap
+    LinkedHashMap
+    TreeMap
+PHASE 3: Performance and Use Cases
+  When to Use Which Collection
+  Performance Considerations
+PHASE 4: Advanced Topics
+  Concurrent Collections
+  Immutable Collections
+PHASE 5: Best Practices and Common Pitfalls
+  Avoiding Common Mistakes
+  Best Practices for Collection Usage
+PHASE 6: Hands-On Practice
+  Coding Exercises
+  Real-World Scenarios

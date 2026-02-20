@@ -1,0 +1,20 @@
+Vector is a legacy List implementation in Java that is thread-safe by default.
+It belongs to the old Java 1.0 era and is part of the Collections Framework, but today it is rarely recommended.
+
+Vector is:
+
+✔ A resizable array (like ArrayList)
+✔ Synchronized (thread-safe) by default
+✔ Allows duplicate & null values
+✔ Maintains insertion order
+
+public synchronized boolean add(E e) - always synchornized
+
+Vector is outdated due to performance issue
+
+So instead of:
+   Vector<String> v = new Vector<>();
+Use:
+  List<String> list = Collections.synchronizedList(new ArrayList<>());
+OR
+  List<String> list = new CopyOnWriteArrayList<>();

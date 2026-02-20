@@ -24,5 +24,21 @@ tableSize - 1 & spread - picks the bucket efficiently
 In general Hashcode is to determine the bucket where the object should live in based on the index
 
 For collection-based - hashcode never works alone, it works along with the equals()
+If hashCode() is overridden correctly:
+👉 Same data = Same hashCode = Same bucket
    - Hashcode - determine the bucket
    - equals() - checks if the KEY is already exits in the bucket
+
+Rule of thumb
+  1 - Equal Objects Must Have Equal Hash Codes
+       If a.equals(b) is true, then:
+         a.hashCode() == b.hashCode()
+       Otherwise, collections like HashMap and HashSet will not work correctly.
+  2 - equals() Must Be Consistent and Logical
+       The equals() method must follow these properties:
+           Reflexive → a.equals(a) is true
+           Symmetric → a.equals(b) == b.equals(a)
+           Transitive → if a.equals(b) and b.equals(c), then a.equals(c)
+           Consistent → result doesn’t change unless data changes
+           Non-null → a.equals(null) is false
+  3 - whenever you override equals() you must override hashcode

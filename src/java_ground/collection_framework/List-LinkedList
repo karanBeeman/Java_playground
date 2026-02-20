@@ -1,0 +1,52 @@
+LinkedList is a class in Java that implements the List and Deque interface and is part of the Java Collections Framework.
+  It is a doubly-linked list implementation, which means that each element in the list has a reference to both the previous and next elements.
+  This allows for efficient insertion and deletion of elements at both ends of the list, as well as in the middle of the list.
+LinkedList is not array based, instead it is node based, where each node contains the data and references to the next and previous nodes in the list.
+
+Each node in a LinkedList contains three components:
+class Node<E> {
+    E item;        // data
+    Node<E> prev;  // previous node
+    Node<E> next;  // next node
+}
+
+[ prev | data | next ]
+
+null <- [A] <-> [B] <-> [C] -> null
+Extra memory per element = 2 references [prev and next]
+
+Internally uses
+  O(n2) for worst case when you have to traverse the entire list to find an element or insert/delete at the end of the list.(using for loop)
+length = 10;
+ if (index < (size / 2)) {
+     // traverse from the beginning (0 to 4)
+ } else {
+     // traverse from the end (9 to 5)
+ }
+
+
+  O(n) using foreach or iterator.
+Foreach or iterator uses
+ Node<E> current = first;
+
+ public E next() {
+     E item = current.item;
+     current = current.next;
+     return item;
+ }
+
+
+Time complexity:
+- Accessing an element by index: O(n) (because you have to traverse the list from the beginning or end)
+- Inserting or deleting an element at the beginning or end: O(1) (because you just need to update a few references)
+- Inserting or deleting an element in the middle: O(n) (because you have to traverse the list to find the position)
+LinkedList is a good choice when you need to frequently add or remove elements from the list, especially at the beginning or end, and you don't need to access elements by index frequently.
+ However, if you need fast access to elements by index, an ArrayList may be a better choice.
+
+Deque (Double Ended Queue) is an interface in Java that extends the Queue interface and allows for the insertion and removal of elements at both ends of the queue.
+LinkedList implements the Deque interface, which means it can be used as a double-ended queue.
+Deque is useful when you need to add or remove elements from both ends of the queue, such as in a breadth-first search algorithm or when implementing a stack using a queue.
+
+LIFO (Last In First Out) - Stack
+
+Not thread safe - achieved by synchronization or using concurrent collections like ConcurrentLinkedDeque or LinkedBlockingDeque.
