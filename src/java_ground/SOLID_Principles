@@ -1,0 +1,158 @@
+SOLID Principles in Java - Payment Processing Example
+
+S - Single Responsibility Principle - A class should have only one reason to change. In our example, the CardValidator class is responsible only for validating card payments, while the CardPaymentProcessor is responsible for processing payments. This separation allows us to modify the validation logic without affecting the payment processing logic, and vice versa.
+O - Open/Closed Principle - Software entities (classes, modules, functions) should be open for extension but closed for modification. This means you should be able to add new functionality without changing existing code. For example, if you want to add a new payment method, you can create a new class that implements the PaymentProcessor interface without modifying existing classes.
+L - Liskov Substitution Principle - Subtypes must be substitutable for their base types. This means that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program. For example, if you have a method that takes a PaymentProcessor, it should work correctly whether you pass in a CardPaymentProcessor or a PaypalPaymentProcessor.
+I - Interface Segregation Principle - Clients should not be forced to depend on interfaces they do not use. Instead of one large interface, create smaller, more specific interfaces that clients can implement based on their needs.
+D - Dependency Inversion Principle - High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces). Abstractions should not depend on details. Details should depend on abstractions.
+
+import java.util.*;
+
+// ------------------ Single Responsibility ------------------
+interface PaymentValidator {
+    void validate(PaymentRequest request);
+}
+
+class CardValidator implements PaymentValidator {
+    public void validate(PaymentRequest request) {
+        if (request.getCardNumber() == null) {
+            throw new IllegalArgumentException("Invalid card");
+        }
+    }
+}
+
+// ------------------ Open/Closed & Liskov ------------------
+interface PaymentProcessor {
+    PaymentResult process(PaymentRequest request);
+}
+
+class CardPaymentProcessor implements PaymentProcessor {
+
+    private final PaymentValidator validator;
+
+    public CardPaymentProcessor(PaymentValidator validator) {
+        this.validator = validator;
+    }
+
+    @Override
+    public PaymentResult process(PaymentRequest request) {
+        validator.validate(request); // SRP
+        System.out.println("Processing card payment for " + request.getAmount());
+        return new PaymentResult(true);
+    }
+}
+
+class PaypalPaymentProcessor implements PaymentProcessor {
+
+    @Override
+    public PaymentResult process(PaymentRequest request) {
+        System.out.println("Processing PayPal payment for " + request.getAmount());
+        return new PaymentResult(true);
+    }
+}
+
+// ------------------ Dependency Inversion ------------------
+interface NotificationService {
+    void notifyUser(PaymentRequest request);
+}
+
+class EmailNotification implements NotificationService {
+    public void notifyUser(PaymentRequest request) {
+        System.out.println("Sending email for payment: " + request.getAmount());
+    }
+}
+
+// ------------------ Interface Segregation ------------------
+interface LoggingService {
+    void log(String message);
+}
+
+class ConsoleLogger implements LoggingService {
+    public void log(String message) {
+        System.out.println("LOG: " + message);
+    }
+}
+
+// ------------------ Domain Classes ------------------
+class PaymentRequest {
+    private final String cardNumber;
+    private final double amount;
+
+    public PaymentRequest(String cardNumber, double amount) {
+        this.cardNumber = cardNumber;
+        this.amount = amount;
+    }
+
+    public String getCardNumber() { return cardNumber; }
+    public double getAmount() { return amount; }
+}
+
+class PaymentResult {
+    private final boolean success;
+    public PaymentResult(boolean success) { this.success = success; }
+    public boolean isSuccess() { return success; }
+}
+
+// ------------------ Factory ------------------
+enum PaymentType { CARD, PAYPAL }
+
+class PaymentProcessorFactory {
+    private final Map<PaymentType, PaymentProcessor> processors;
+
+    public PaymentProcessorFactory(Map<PaymentType, PaymentProcessor> processors) {
+        this.processors = Collections.unmodifiableMap(processors); // immutable map
+    }
+
+    public PaymentProcessor getProcessor(PaymentType type) {
+        return processors.get(type);
+    }
+}
+
+// ------------------ Orchestrator ------------------
+class PaymentService {
+    private final PaymentProcessorFactory factory;
+    private final NotificationService notifier;
+    private final LoggingService logger;
+
+    public PaymentService(PaymentProcessorFactory factory,
+                          NotificationService notifier,
+                          LoggingService logger) {
+        this.factory = factory;
+        this.notifier = notifier;
+        this.logger = logger;
+    }
+
+    public void makePayment(PaymentType type, PaymentRequest request) {
+        PaymentProcessor processor = factory.getProcessor(type);
+        PaymentResult result = processor.process(request);
+        if (result.isSuccess()) {
+            notifier.notifyUser(request);
+        }
+        logger.log("Payment processed: " + request.getAmount());
+    }
+}
+
+// ------------------ Demo ------------------
+public class SolidDemo {
+    public static void main(String[] args) {
+        PaymentValidator cardValidator = new CardValidator();
+        PaymentProcessor cardProcessor = new CardPaymentProcessor(cardValidator);
+        PaymentProcessor paypalProcessor = new PaypalPaymentProcessor();
+
+        Map<PaymentType, PaymentProcessor> processorMap = new HashMap<>();
+        processorMap.put(PaymentType.CARD, cardProcessor);
+        processorMap.put(PaymentType.PAYPAL, paypalProcessor);
+
+        PaymentProcessorFactory factory = new PaymentProcessorFactory(processorMap);
+        NotificationService notifier = new EmailNotification();
+        LoggingService logger = new ConsoleLogger();
+
+        PaymentService paymentService = new PaymentService(factory, notifier, logger);
+
+        PaymentRequest request = new PaymentRequest("1234-5678-9876-5432", 500.0);
+        paymentService.makePayment(PaymentType.CARD, request);
+
+        PaymentRequest paypalRequest = new PaymentRequest(null, 1000.0);
+        paymentService.makePayment(PaymentType.PAYPAL, paypalRequest);
+    }
+}

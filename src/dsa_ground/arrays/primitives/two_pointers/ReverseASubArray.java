@@ -40,14 +40,15 @@ END
 // O(1) space complexity
 
 /// Two pointer technique
+/// opposite pointers
 
 public class ReverseASubArray {
 
     public static void main(String[] args) {
 
-        int[] arr = {1, 2, 3, 4, 5};
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
         int l = 1;
-        int r = 3;
+        int r = 5;
 
         while (l < r) {
             int temp = arr[l];
