@@ -1,0 +1,23 @@
+HashSet
+  hashset is a collection that implements the Set interface and is backed by a hash table (actually a HashMap instance).
+  It does not guarantee any specific order of elements and allows one null element.
+  It is not synchronized, so it is not thread-safe.
+  If multiple threads access a hash set concurrently and at least one of the threads modifies the set, it must be synchronized externally.
+
+Features
+  ❌ No order guarantee
+  ✅ Fast (O(1) average)
+  ✅ Allows one null
+     Uses hashing (refer HashCode_Explanation page)
+
+Set<String> set = new HashSet<>();
+
+It stores values in hash buckets based on their hash code, which allows for fast access and retrieval of elements.
+When you add an element to a HashSet, it calculates the hash code of the element and determines the appropriate bucket to store it in.
+
+add/remove/contains are O(1) on average
+
+HashSet -> HashMap -> hashcode -> bucket array -> linked list or tree (for collision resolution)
+    - HashSet uses a HashMap internally to store its elements.
+    - Each element in the HashSet is stored as a key in the HashMap, with a constant dummy value (often `Boolean.TRUE`) associated with it.
+    - This allows the HashSet to leverage the efficient hashing and lookup capabilities of the HashMap while providing the unique element storage and set operations defined by the Set interface.

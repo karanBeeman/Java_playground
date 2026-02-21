@@ -1,0 +1,18 @@
+LinkedHashSet is a class in Java that implements the Set interface and is part of the Java Collections Framework.
+ It is a hash table and Doubly linked list implementation of the Set interface,
+      which means it maintains the order of elements based on their insertion order.
+It is not synchronized (not thread-safe).
+LinkedHashSet which allows for efficient insertion, deletion, and search operations while maintaining the order of elements.
+
+Features
+     Maintains insertion order
+  ✅ Fast (O(1) average)
+  ✅ Allows one null
+     Uses hashing (refer HashCode_Explanation page)
+
+HashSet:        Hash table only
+LinkedHashSet:  Hash table + Doubly Linked List
+
+Head -> First → Second → Third → Tail
+
+LinkedHashSet<String> set = new LinkedHashSet<>();

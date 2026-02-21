@@ -1,0 +1,43 @@
+TreeSet in Java is a class that implements the Set interface and uses a tree for storage. It is part of the Java Collections Framework
+   It provides a way to store unique elements in a sorted order.
+   The TreeSet class is based on the Red-Black tree data structure, which allows for efficient insertion, deletion, and search operations.
+
+ 👉 Stores elements in sorted order
+ 👉 Uses a Red-Black Tree internally
+ 👉 Does not allow duplicates or null
+
+Set → SortedSet → NavigableSet → TreeSet
+
+A Red-Black Tree is a:
+ Self-balancing Binary Search Tree (BST)
+ Keeps height balanced
+ Guarantees O(log n) operations
+
+         20
+        /  \
+      10    30 Internally not stored in array/buckets like HashSet.
+
+Natural Ordering (Comparable)
+    - TreeSet uses the natural ordering of elements (defined by the compareTo method of the Comparable interface) to sort the elements in the set.
+    - If the elements do not implement the Comparable interface, a ClassCastException will be thrown at runtime when you try to add an element to the TreeSet.
+
+TreeSet -> TreeMap -> Red-Black Tree
+    - TreeSet uses a TreeMap internally to store its elements.
+    - Each element in the TreeSet is stored as a key in the TreeMap, with a constant dummy value (often `Boolean.TRUE`) associated with it.
+    - This allows the TreeSet to leverage the efficient sorting and lookup capabilities of the TreeMap while providing the unique element storage and set operations defined by the Set interface.
+
+TreeSet<String> set = new TreeSet<>();
+TreeSet must implements Comparable for natural ordering or provide a Comparator for custom ordering
+
+when implements Comparable it must override compareTo method
+    - compareTo returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+
+when using Comparator it must override compare method
+    - compare returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+
+@Override
+    public int compareTo(TreeSetLearning o) {
+        return 0; // 0 means it will consider all objects as equal and only one will be stored in the TreeSet
+        return this.value - o.value; // for natural ordering based on value
+        return 1; // this will allow all elements to be added to the TreeSet, but they will not be sorted in any specific order
+    }

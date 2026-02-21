@@ -1,6 +1,11 @@
 Hashcode is the numeric representation of object to store and retrieve objects efficiently
    commonly used by Hashmap, Hashset, Hashtable
 
+   Index →  0   1   2   3   4   5   6   7
+           ┌───┬───┬───┬───┬───┬───┬───┬───┐
+   Table → │   │ A │   │ C │   │ B │   │   │
+           └───┴───┴───┴───┴───┴───┴───┴───┘
+
  map.put(key, value);
    int hash = key.hashCode();              // 1. get hashCode
    int spread = hash ^ (hash >>> 16);      // 2. mix bits
