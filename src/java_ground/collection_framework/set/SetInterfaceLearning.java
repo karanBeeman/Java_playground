@@ -1,4 +1,4 @@
-package java_ground.collection_framework;
+package java_ground.collection_framework.set;
 
 import java.util.Comparator;
 import java.util.HashSet;
