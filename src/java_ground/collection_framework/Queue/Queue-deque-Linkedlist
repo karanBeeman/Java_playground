@@ -1,0 +1,33 @@
+LinkedList<E> implements List<E>, Deque<E>, Queue<E>
+
+So LinkedList is:
+  A List (indexed operations)
+  A Queue (FIFO)
+  A Deque (double-ended queue)
+
+LinkedList using Queue interface methods: (insert last , remove first)
+  Queue<Integer> q = new LinkedList<>(); // FIFO
+  q.offer(1); // add to end
+  q.poll(); // remove from front
+  q.peek(); // look at front without removing
+
+Why LinkedList Is Rarely Used as Queue in Production
+
+Although it works, in real systems:
+   LinkedList is usually NOT preferred.
+Reasons:
+   ❌ 1. High Memory Overhead
+            Each element = object + 2 pointers
+   ❌ 2. Poor Cache Locality
+            Slower in practice
+   ❌ 3. Not Thread-Safe
+            Needs external synchronization
+   ❌ 4. No Capacity Control
+
+LinkedList using Deque interface methods: (insert/remove at both ends)
+  Deque<Integer> deque = new LinkedList<>();
+  deque.offerFirst(1); // add to front
+  deque.offerLast(2); // add to end
+  deque.pollFirst(); // remove from front
+  deque.pollLast(); // remove from end
+

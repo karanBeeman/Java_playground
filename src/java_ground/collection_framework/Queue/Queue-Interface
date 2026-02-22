@@ -1,0 +1,45 @@
+The Queue interface in Java, part of the java.util package, (mainly for processing the element, not for storing)
+  represents an ordered collection designed for holding elements prior to processing,
+  typically following the First-In-First-Out (FIFO) principle.
+  Elements are added to the rear (tail) and removed from the front (head)
+
+FIFO Ordering:
+   Elements are processed in the order they were added, similar to a real-world waiting line.
+   The PriorityQueue implementation is an exception, as it orders elements based on a specified priority.
+No Index Access:
+   Elements cannot be accessed by an index; access is limited to operations at the head and tail
+Implementations:
+   Since Queue is an interface, it cannot be instantiated directly. You must use a concrete class that implements it, such as
+  LinkedList: A basic, general-purpose FIFO queue implementation using a doubly linked list internally.
+  PriorityQueue: Orders elements based on their natural ordering or a custom Comparator, not strictly FIFO.
+  ArrayDeque: Implements the Deque (Double-Ended Queue) interface, which extends Queue. It's efficient for insertions and deletions at both ends.
+  BlockingQueue implementations: Found in the java.util.concurrent package,
+     these are thread-safe and support operations that wait for the queue to become non-empty or for space to become available
+
+
+Real life scenarios:
+
+  -> Tasks → Queue → Worker Threads
+
+  -> ExecutorService pool = Executors.newFixedThreadPool(5);
+     ExecutorService internally uses queue, So tasks are processed one by one in order.
+  -> Producer–Consumer Problem  -  Producer → Queue → Consumer
+  -> Event Handling  -  Events → Queue → Event Handlers
+  -> Message Queues  -  Messages → Queue → Message Processors(Kafka, RabbitMQ)
+  -> BFS Algorithm (Graph / Tree) use queue
+
+Normal Queue Operations: (FIFO) -> ArrayDeque, LinkedList
+priority queue operations: (Priority) -> PriorityQueue  - VIP → First, Normal → Later
+Blocking queue operations: (Thread-Safe) -> LinkedBlockingQueue, ArrayBlockingQueue
+
+| Queue Type    | Storage |
+| ------------- | ------- |
+| ArrayDeque    | Array   |
+| LinkedList    | Nodes   |
+| PriorityQueue | Heap    |
+
+Operation Throws       Returns Special    Description
+          Exception	   Value
+Insert	  add(E e)	   offer(E e)	       Adds an element to the rear of the queue. offer() is generally preferable for capacity-constrained queues.
+Remove	  remove()	   poll()	           Retrieves and removes the head of the queue. poll() returns null if the queue is empty, while remove() throws a NoSuchElementException.
+Examine	  element()	   peek()	           Retrieves, but does not remove, the head of the queue. peek() returns null if the queue is empty, while element() throws a NoSuchElementException

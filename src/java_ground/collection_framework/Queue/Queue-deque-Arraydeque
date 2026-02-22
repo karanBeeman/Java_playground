@@ -1,0 +1,47 @@
+ArrayDeque is a resizable, array-based, double-ended queue implementation of Deque
+
+Fast insert/remove from both ends using a circular buffer
+
+Circular buffer allows efficient use of space by wrapping around when the end of the array is reached
+  means only head and tail indices are maintained, no shifting of elements needed
+     Think of it like a clock ⏰:
+       Hand moves → numbers stay
+     Pointers move → elements stay
+capacity is always a power of 2 for efficient modulo operations using bitwise AND
+     capacity = 2^n (e.g., 8, 16, 32, ...)
+     allows for O(1) time complexity for index calculations
+
+ArrayDeque can have 3 behaviours
+| Role  | Behavior                  |
+| ----- | ------------------------- |
+| Queue | FIFO (First In First Out) |
+| Stack | LIFO (Last In First Out)  |
+| Deque | Both ends                 |
+
+Queue operations:
+Add: (Enqueue) - adds an element to the tail of the queue
+  offer(e)
+  offerLast(e)
+  add(e)
+Remove: (Dequeue) - removes an element from the head of the queue
+    poll() - returns null if empty
+    pollFirst()
+    remove() - throws NoSuchElementException if empty
+Peek: - retrieves but does not remove the head of the queue
+    peek() - returns null if empty
+    peekFirst()
+    element() - throws NoSuchElementException if empty
+Stack operations:
+Push: - adds an element to the top of the stack
+    push(e)
+    addFirst(e)
+Pop: - removes an element from the top of the stack
+    pop() - throws NoSuchElementException if empty
+    removeFirst() - throws NoSuchElementException if empty
+Deque operations:
+Add First: - adds an element to the front of the deque
+    offerFirst(e)
+    addFirst(e)
+Add Last: - adds an element to the end of the deque
+    offerLast(e)
+    addLast(e)

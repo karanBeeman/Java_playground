@@ -1,0 +1,57 @@
+A Priority Queue is a special type of queue where elements are removed based on priority, not on insertion order
+Heap is very important data structure for implementing a priority queue,
+  as it allows for efficient retrieval of the highest (or lowest) priority element
+       while maintaining a balanced structure for fast insertions and deletions.
+
+👉 Unlike a normal queue (FIFO), a priority queue always gives you the highest-priority element first
+
+Types of Priority Queue
+1. Min-Heap: The element with the smallest value has the highest priority (default in Java's PriorityQueue)
+     by default, PriorityQueue in Java uses natural ordering via Comparable
+2. Max-Heap: The element with the largest value has the highest priority
+
+Priority Queue is not sorted like a TreeSet,
+   it only guarantees that the head of the queue is the highest priority element. The rest of the elements are not in any specific order.
+   only heap property is maintained, not sorted order
+   Heap rule:
+      Parent is smaller than children.
+
+Internal Implementation
+- Java's `PriorityQueue` is implemented as a binary heap (specifically a min-heap by default).
+        10
+       /  \
+     20    30
+    /  \
+  40   50
+
+| Operation | Time     |
+| --------- | -------- |
+| add()     | O(log n) |
+| poll()    | O(log n) |
+| peek()    | O(1)     |
+
+| Method            | Purpose                 |
+| ----------------- | ----------------------- |
+| add(e) / offer(e) | Insert                  |
+| poll()            | Remove highest priority |
+| peek()            | View highest priority   |
+| size()            | Count                   |
+| isEmpty()         | Check empty             |
+
+Custom Priority (Comparator)
+class Student {
+    int marks;
+}
+PriorityQueue<Student> pq =
+    new PriorityQueue<>(
+        (a, b) -> b.marks - a.marks // Max heap
+    );
+
+
+ Where PriorityQueue Is Used
+ ✔ 1️⃣ Dijkstra Algorithm (Shortest Path)
+ ✔ 2️⃣ Top K Problems
+ ✔ 3️⃣ Task Scheduling
+ ✔ 4️⃣ CPU Scheduling
+ ✔ 5️⃣ Event Simulation
+ ✔ 6️⃣ Median in Stream
