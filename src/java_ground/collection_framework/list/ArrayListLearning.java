@@ -1,4 +1,4 @@
-package java_ground.collection_framework;
+package java_ground.collection_framework.list;
 
 import java.util.ArrayList;
 import java.util.Collections;
