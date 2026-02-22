@@ -61,6 +61,9 @@ and is created when the thread starts
    - Method call frames (return address, parameters, local variables)
    - ThreadLocal variables (each thread has its own copy of a ThreadLocal variable, so they are thread-safe by design)
 
+Thread Safety ≠ Stack or Heap
+Thread Safety = Sharing or Not Sharing
+
 --------------
 
 | Case                             | Thread-Safe? | Why                |

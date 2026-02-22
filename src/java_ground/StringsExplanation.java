@@ -1,5 +1,9 @@
 package java_ground;
 
+//String        → Read-only, safe, slow for changes
+//StringBuilder → Editable, fast, best for building strings
+//StringBuffer  → Editable, thread-safe, slower
+
 public class StringsExplanation {
 
     public static void main(String[] args) {
@@ -40,11 +44,38 @@ class StringBuilderExplanation {
 // By default array size is 16 (internally) and if we append more than 16 characters,
 // it will create new array with size (old capacity * 2) + 2 and copy old array to new array and then append new character.
 
-  public static void main(String[] args) {
+//Use StringBuilder when:
+   //✔ Loops
+   //✔ Many appends
+   //✔ Dynamic text
+
+  public static void main(String[] args) throws InterruptedException {
      StringBuilder s1 = new StringBuilder("hello");
      StringBuilder s2 = new StringBuilder("hello");
      System.out.println(s1.equals(s2)); // false - stringbuffer does not override equals method() or hashCode()
      System.out.println(s1.toString().equals(s2.toString()));
+
+      StringBuilder sb = new StringBuilder();
+
+      Runnable task = () -> {
+          for (int i = 0; i < 1000; i++) {
+              sb.append("A");
+          }
+
+      };
+
+      Thread t1 = new Thread(task);
+      Thread t2 = new Thread(task);
+
+      t1.start();
+      t2.start();
+
+      t1.join();
+      t2.join();
+
+      // Print AFTER threads finish
+      System.out.println(sb.length());
+
   }
 }
 
@@ -56,10 +87,31 @@ class StringBufferExplanation {
     // StringBuilder = Manual car (faster but you must handle control)
     // StringBuffer synchronizes all its methods internally, ensuring only one thread can modify the object at a time.
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         StringBuffer s1 = new StringBuffer("hello");
         StringBuffer s2 = new StringBuffer("hello");
         System.out.println(s1.equals(s2)); // false - stringbuffer does not override equals method() or hashCode()
         System.out.println(s1.toString().equals(s2.toString()));
+
+        StringBuffer sb = new StringBuffer();
+
+        Runnable task = () -> {
+            for (int i = 0; i < 1000; i++) {
+                sb.append("A");
+            }
+        };
+
+        Thread t1 = new Thread(task);
+        Thread t2 = new Thread(task);
+
+        t1.start();
+        t2.start();
+
+        // Wait for both threads
+        t1.join();
+        t2.join();
+
+        // Print AFTER threads finish
+        System.out.println(sb.length());
     }
 }
