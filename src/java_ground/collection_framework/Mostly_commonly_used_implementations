@@ -1,0 +1,90 @@
+ArrayList → Default List (Most Used)
+-----------------------------------
+📌 Purpose
+     Store ordered elements with fast access.
+Why Industry Uses It
+ ✔ Fast get(index) → O(1)
+ ✔ Memory efficient
+ ✔ Simple and predictable
+ ✔ Cache-friendly
+Used When
+ API responses
+ DB results
+ DTO lists
+In-memory data
+UI data
+
+ArrayDeque → Default Queue / Stack
+-------------------------------------
+📌 Purpose
+    Fast FIFO / LIFO / double-ended operations.
+
+Why Industry Uses It
+ ✔ O(1) add/remove
+ ✔ No node objects (unlike LinkedList)
+ ✔ Faster than Stack & LinkedList
+ ✔ Low GC pressure
+Used When
+  BFS / DFS
+  Task queues
+  Sliding window
+  Undo/redo
+  Request processing
+
+PriorityQueue → Ranking / Scheduling
+-------------------------------------
+📌 Purpose
+     Always get min/max element.
+
+Why Industry Uses It
+  ✔ O(log n) operations
+  ✔ Best for top-K / scheduling
+  ✔ Heap-based → efficient
+Used When
+  Job schedulers
+  Dijkstra
+  Load balancing
+  Event systems
+  Leaderboards
+  Rate limiting
+
+HashSet → Fast Unique Collection
+📌 Purpose
+    Store unique elements with fast lookup.
+
+Why Industry Uses It
+  ✔ O(1) contains/add
+  ✔ No duplicates
+  ✔ Very fast
+Used When
+  Removing duplicates
+  Caching keys
+  Permission lists
+  Validation
+  Filtering
+
+Thread-safe versions
+
+  | Normal        | Thread-Safe                   |
+  | ------------- | ----------------------------- |
+  | ArrayList     | CopyOnWriteArrayList          |
+  | HashSet       | ConcurrentHashMap.newKeySet() |
+  | ArrayDeque    | ConcurrentLinkedQueue         |
+  | PriorityQueue | PriorityBlockingQueue         |
+
+| Need             | Use                 |
+| ---------------- | ------------------- |
+| Ordered List     | ArrayList           |
+| Fast Queue/Stack | ArrayDeque          |
+| Priority         | PriorityQueue       |
+| Unique Items     | HashSet             |
+| Thread Safe      | Concurrent versions |
+
+
+| Scenario              | Best Choice     | Why         |
+| --------------------- | --------------- | ----------- |
+| Add/remove at end     | `ArrayList`     | Fastest     |
+| Add/remove front/back | `ArrayDeque`    | O(1)        |
+| Add/remove middle     | `LinkedList`    | No shifting |
+| Unique + fast remove  | `HashSet`       | Hashing     |
+| Priority-based remove | `PriorityQueue` | Heap        |

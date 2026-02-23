@@ -1,0 +1,19 @@
+stack follows LIFO = Last In, First Out
+
+Stack is a legacy class that extends Vector
+
+public class Stack<E> extends Vector<E>
+
+| Method      | Purpose                 |
+| ----------- | ----------------------- |
+| `push()`    | Add element on top      |
+| `pop()`     | Remove top element      |
+| `peek()`    | View top element        |
+| `isEmpty()` | Check if stack is empty |
+| `search()`  | Find element position   |
+
+❌ It is synchronized (slow)
+❌ Based on Vector (outdated design)
+❌ Poor performance in many cases
+
+instead of stack, use Deque (ArrayDeque) for better performance and more features.
