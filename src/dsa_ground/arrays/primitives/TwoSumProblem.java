@@ -60,7 +60,7 @@ END FUNCTION
 public class TwoSumProblem {
 
     public static void main(String[] args) {
-
+// this works if the array is not sorted
         int[] arr = {2, 4, 5, 7};
         int target = 9;
 
@@ -80,7 +80,24 @@ public class TwoSumProblem {
         }
         System.out.println(list);
 
+        // this works for sorted array
+        int arr1[] = {2, 4, 5, 7};
+        int target1 = 9;
+        int left = 0;
+        int right = arr1.length-1;
+        List<String> list1 = new ArrayList<>();
 
+        while(left < right) {
+            int sum = arr1[left] + arr1[right];
+            if(sum == target1) {
+                list1.add(arr1[left] + " " + arr1[right]);
+                left++;
+                right--;
+            } else if (sum < target1) left++;
+            else right--;
+        }
+
+        System.out.println(list1);
     }
 
 }
