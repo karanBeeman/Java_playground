@@ -16,12 +16,17 @@ public class SmallestSubArray {
         int s = 7;
         int minLength = Integer.MAX_VALUE;
 
+        // tell this logic in simple words
+        // we are using two pointers, one pointer is the start pointer and the other pointer is the end pointer.
+        // We are expanding the window by moving the end pointer and adding the current element to the sum.
+        // When the sum is greater than or equal to the target, we are shrinking the window by moving the start pointer and subtracting the element at the start index from the sum.
+
         for (int end = 0; end < arr.length; end++) {
-            sum = sum + arr[end];
+            sum = sum + arr[end]; // expanding the window by adding the current element to the sum
 
             while (sum >= s) {
                 minLength = Math.min(minLength, end - start + 1);
-                sum = sum - arr[start];
+                sum = sum - arr[start]; // shrinking the window by subtracting the element at the start index from the sum
                 start++;
             }
         }
