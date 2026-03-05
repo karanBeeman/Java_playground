@@ -47,6 +47,8 @@ END */
 /// Complexity
 // O(n)
 
+// technique: Two pointertechnique
+
 public class RemoveDuplicateFromSortedArray {
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package dsa_ground.arrays.primitives;
+package dsa_ground.arrays.primitives.two_pointers;
 
 //Problem Statement
 //Given an array of integers and a target value, find all pairs of numbers whose sum is equal to the target.
@@ -80,7 +80,7 @@ public class TwoSumProblem {
         }
         System.out.println(list);
 
-        // this works for sorted array
+        // this works for sorted array // two pointers technique
         int arr1[] = {2, 4, 5, 7};
         int target1 = 9;
         int left = 0;
