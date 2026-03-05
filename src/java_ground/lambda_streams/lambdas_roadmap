@@ -1,0 +1,69 @@
+1. Core Understanding of Lambdas
+  Syntax & Basics
+     -  (args) -> expression vs (args) -> { statements }
+  Type inference for parameters
+     -  No-arg lambdas: () -> 42
+  Functional Interfaces
+     -  Built-in interfaces: Function, Predicate, Consumer, Supplier, BiFunction
+     -  Custom functional interfaces with @FunctionalInterface
+  Method References
+     - Static: Class::staticMethod
+     - Instance: instance::method
+     - Constructor: Class::new
+
+2- Streams & Collections Integration
+
+    Stream basics: filter, map, forEach, collect
+    Intermediate operations: distinct, sorted, limit, skip
+    Terminal operations: reduce, count, anyMatch, allMatch, noneMatch
+    Collectors
+        - toList(), toSet(), toMap()
+        - Grouping and partitioning: groupingBy(), partitioningBy()
+        - Summarizing: summarizingInt(), summarizingDouble()
+    Parallel Streams
+         When to use parallel streams
+         Pitfalls: shared mutable state, order, performance considerations
+
+3 Advanced Lambda Patterns
+
+    Higher-Order Functions
+         Functions returning functions
+         Functions taking functions as arguments
+    Function Composition
+         Function.andThen(), Function.compose()
+    Currying & Partial Application
+         Breaking functions into smaller pieces
+    Lazy Evaluation
+         Streams are evaluated lazily; understand implications
+    Side Effects
+        Avoid them in streams and lambdas for cleaner
+
+4. Concurrency & Lambdas
+
+     Using lambdas with:
+         CompletableFuture
+         ExecutorService / ForkJoinPool
+         Parallel stream best practices
+    Exception handling in lambdas:
+         Wrapping checked exceptions
+         Custom utility wrappers
+
+5. Design Patterns with Lambdas
+
+    Strategy Pattern → Replace concrete classes with lambdas
+    Command Pattern → Runnable / Callable lambdas
+    Observer Pattern → Event handlers using lambdas
+    Template Methods → Use lambdas to parameterize behavior
+
+6. Performance & Best Practices
+
+    Avoiding unnecessary object creation
+    Reusing lambda instances when possible
+    Understanding the cost of capturing variables (closures)
+    Profiling and optimizing lambda-heavy code
+
+7. Testing & Debugging Lambdas
+
+    Unit testing lambdas with JUnit
+    Debugging techniques for lambda expressions
+    Common pitfalls and how to avoid them

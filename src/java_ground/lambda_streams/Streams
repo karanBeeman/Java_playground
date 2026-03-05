@@ -1,0 +1,32 @@
+Stream is - A sequence of elements supporting functional-style operations
+
+important:
+It does not store data
+It processes data from a source
+It is not a data structure
+It supports pipeline operations:
+
+Source → Intermediate Operations → Terminal Operation
+
+what are intermediate operations
+
+Intermediate operations are operations that transform a stream into another stream. They are lazy, meaning they do not execute until a terminal operation is invoked.
+Examples include:
+- filter(): Filters elements based on a predicate.
+- map(): Transforms each element using a function.
+- distinct(): Removes duplicate elements.
+- sorted(): Sorts the elements.
+- limit(): Limits the number of elements.
+- skip(): Skips a specified number of elements.
+
+what are terminal operations
+
+Terminal operations are operations that produce a result or a side-effect. They trigger the execution of the stream pipeline.
+Examples include:
+- forEach(): Performs an action for each element.
+- collect(): Collects the elements into a collection or a summary result.
+- reduce(): Reduces the elements to a single value using an associative accumulation function.
+- count(): Counts the number of elements.
+- anyMatch(): Checks if any elements match a given predicate.
+- allMatch(): Checks if all elements match a given predicate.
+- noneMatch(): Checks if no elements match a given predicate.
