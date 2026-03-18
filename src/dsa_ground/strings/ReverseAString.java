@@ -1,4 +1,4 @@
-package dsa_ground.arrays.strings;
+package dsa_ground.strings;
 
 //Problem Statement
 //

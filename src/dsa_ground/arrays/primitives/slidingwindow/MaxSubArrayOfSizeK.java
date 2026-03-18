@@ -11,7 +11,7 @@ public class MaxSubArrayOfSizeK {
     public static void main(String[] args) {
         int[] arr = {2, 1, 5, 1, 3, 2};
         int k = 3;
-        int maxValue = 0;
+        int maxValue;
         int minValue = 0;
 
         for(int i = 0; i < k; i++) {
@@ -28,6 +28,7 @@ public class MaxSubArrayOfSizeK {
         }
 
         System.out.println(maxValue);
+
     }
 
 }

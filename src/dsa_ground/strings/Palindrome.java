@@ -1,4 +1,4 @@
-package dsa_ground.arrays.strings;
+package dsa_ground.strings;
 
 /// Problem:
 //Given a string s, determine whether it is a palindrome.
