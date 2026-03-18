@@ -1,0 +1,104 @@
+Client sends request with JWT
+      ↓
+Tomcat receives request
+      ↓
+SecurityContextPersistenceFilter
+      ↓
+BearerTokenAuthenticationFilter extracts token
+      ↓
+AuthenticationManager.authenticate()
+      ↓
+JwtAuthenticationProvider validates token
+      ↓
+JwtDecoder verifies signature
+      ↓
+JwtAuthenticationConverter maps roles
+      ↓
+JwtAuthenticationToken created
+      ↓
+SecurityContextHolder stores authentication
+      ↓
+AuthorizationFilter checks roles
+      ↓
+PrincipalToMDCFilter logs user
+      ↓
+Controller executes
+      ↓
+Response returned
+      ↓
+SecurityContext cleared
+
+1. Client Sends Request With OAuth2 Access Token
+   GET /dim-bff/v2/profiles/123/secure
+   Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
+2. Request Enters Servlet Container
+    The request first reaches the servlet container such as:
+        Apache Tomcat
+    Tomcat assigns a thread.
+3 . Spring Security Filter Chain
+    .oauth2ResourceServer(oauth2 -> oauth2.jwt())
+    Spring automatically registers OAuth2 filters.
+    Important filters involved:
+      SecurityContextPersistenceFilter
+      BearerTokenAuthenticationFilter
+      AuthorizationFilter
+4. SecurityContextPersistenceFilter
+     It creates an empty context and stores it in:
+        SecurityContextHolder
+     Thread-25
+        ↓
+     SecurityContextHolder
+        ↓
+     SecurityContext (empty)
+5. BearerTokenAuthenticationFilter (extracts token)
+     This filter is responsible for extracting the token.
+        It looks for the Authorization header.
+        If found, it extracts the token and creates a BearerTokenAuthenticationToken.
+6. AuthenticationManager Is Called
+     The filter creates an authentication request:
+         BearerTokenAuthenticationToken
+     Then it calls:
+         AuthenticationManager.authenticate()
+     Internally Spring chooses:
+         JwtAuthenticationProvider to validate the token
+7. JwtAuthenticationProvider Validates the Token
+     Validation steps:
+        1. Decode JWT
+        2. Verify signature
+        3. Check expiration
+        4. Validate issuer
+        5. Extract claims
+8. JwtAuthenticationConverter Runs
+     Now Spring must convert the JWT claims into Spring Security authentication objects
+        After validation, the provider calls:
+            JwtAuthenticationConverter
+        This converter transforms JWT claims into:
+            GrantedAuthority objects
+        For example, a claim like "roles": ["USER", "ADMIN"] becomes:
+            ROLE_USER, ROLE_ADMIN
+9. Authentication Object Is Created
+     Now spring creates an wtAuthenticationToken
+        JwtAuthenticationToken
+         ├── Principal → john
+         ├── Credentials → JWT token
+         └── Authorities
+                ROLE_ADMIN
+                ROLE_USER
+10. SecurityContextHolder Stores Authentication
+        The authenticated token is stored in the SecurityContext:
+        SecurityContextHolder.getContext().setAuthentication(authentication)
+        Thread-25
+           ↓
+        SecurityContextHolder
+           ↓
+        SecurityContext
+           ↓
+        JwtAuthenticationToken
+                Principal → john
+                Authorities → ROLE_ADMIN, ROLE_USER
+11. AuthorizationFilter Checks Roles
+        When the request reaches the controller, Spring checks if the user has the required roles.
+        For example, if the endpoint requires ROLE_ADMIN, Spring checks if the user has that authority
+12. Access Granted or Denied
+        If the user has the required role, access is granted and the controller method executes.
+        If not, Spring Security returns a 403 Forbidden response.
